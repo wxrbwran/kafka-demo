@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="fatal">
+  <Properties>
+    <Property name="baseDir" value="${sys:user.home}/logs/kafka-demo/collector"/>
+    <Property name="patternLayout" value="[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}] [%level{length=5}] [%thread-%tid] [%logger] [%X{hostname}] [%X{ip}] [%X{applicationName}] [%F, %L, %C, %M] [%m] ## '%ex'%n"/>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+      <ThresholdFilter level="info" onMatch="ACCEPT"
+        onMismatch="DENY"/>
+      <PatternLayout pattern="${patternLayout}" />
+<!--        pattern="%d{MM:dd HH:mm:ss.SSS} | %level | %logger{36} | %msg%n"/>-->
+    </Console>
+
+    <!--debug级别日志文件输出-->
+    <RollingRandomAccessFile name="app_appender" fileName="${baseDir}/app.log"
+      filePattern="${baseDir}/app_%d{yyyy-MM-dd}.%i.log">
+      <!-- 过滤器 -->
+      <!-- 无过滤器，全量日志     -->
+      <!-- 日志格式 -->
+      <PatternLayout pattern="${patternLayout}" />
+      <!-- 策略 -->
+      <Policies>
+        <!-- 每隔一天转存 -->
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <!-- 文件大小 -->
+        <SizeBasedTriggeringPolicy size="1000 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="20" />
+    </RollingRandomAccessFile>
+    <!-- error级别日志文件输出 -->
+    <RollingRandomAccessFile name="error_appender" fileName="${baseDir}/error.log"
+      filePattern="${baseDir}/error_%d{yyyy-MM-dd}.%i.log">
+      <!-- 过滤器 -->
+      <Filters>
+        <!-- 限制日志级别在error及以上 -->
+        <ThresholdFilter level="error"/>
+      </Filters>
+      <!-- 日志格式 -->
+<!--      <PatternLayout pattern="%d{HH:mm:ss:SSS} | %p | %l | %m%n"/>-->
+      <PatternLayout pattern="${patternLayout}" />
+      <Policies>
+        <!-- 每隔一天转存 -->
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <!-- 文件大小 -->
+        <SizeBasedTriggeringPolicy size="500MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="20" />
+    </RollingRandomAccessFile>
+  </Appenders>
+  <Loggers>
+<!--  业务相关 异步logger  -->
+    <AsyncLogger name="com.xiaoran.*" level="info" includeLocation="true" >
+      <AppenderRef ref="app_appender"/>
+    </AsyncLogger>
+    <AsyncLogger name="com.xiaoran.*" level="info" includeLocation="true" >
+      <AppenderRef ref="error_appender"/>
+    </AsyncLogger>
+    <Root level="debug">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="app_appender"/>
+      <AppenderRef ref="error_appender"/>
+    </Root>
+  </Loggers>
+</Configuration>

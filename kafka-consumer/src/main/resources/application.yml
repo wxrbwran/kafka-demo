@@ -1,0 +1,24 @@
+server:
+  port: 8002
+
+
+spring:
+  application:
+    name: kafka-consumer
+  kafka:
+    # kafka服务器ip和端口号
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      # consumer 消息的签收机制：手工签收
+      #如果'enable-auto-commit'为true，则消费者偏移自动提交给Kafka的频率（以毫秒为单位），默认值为5000。
+      enabled-auto-commit: false
+      #当Kafka中没有初始偏移量或者服务器上不再存在当前偏移量时该怎么办，默认值为latest，表示自动将偏移重置为最新的偏移量
+      #可选的值为latest, earliest, none
+      auto-offset-reset: earliest
+      # 序列化配置
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual
+      concurrency: 5
+
