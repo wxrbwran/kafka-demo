@@ -15,8 +15,8 @@
     </Console>
 
     <!--debug级别日志文件输出-->
-    <RollingRandomAccessFile name="app_appender" fileName="${baseDir}/app.log"
-      filePattern="${baseDir}/app_%d{yyyy-MM-dd}.%i.log">
+    <RollingRandomAccessFile name="app_appender" fileName="${baseDir}/app-log-collector.log"
+      filePattern="${baseDir}/app-log-collector_%d{yyyy-MM-dd}.%i.log">
       <!-- 过滤器 -->
       <!-- 无过滤器，全量日志     -->
       <!-- 日志格式 -->
@@ -31,8 +31,8 @@
       <DefaultRolloverStrategy max="20" />
     </RollingRandomAccessFile>
     <!-- error级别日志文件输出 -->
-    <RollingRandomAccessFile name="error_appender" fileName="${baseDir}/error.log"
-      filePattern="${baseDir}/error_%d{yyyy-MM-dd}.%i.log">
+    <RollingRandomAccessFile name="error_appender" fileName="${baseDir}/error-log-collector.log"
+      filePattern="${baseDir}/error-log-collector_%d{yyyy-MM-dd}.%i.log">
       <!-- 过滤器 -->
       <Filters>
         <!-- 限制日志级别在error及以上 -->
