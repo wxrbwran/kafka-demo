@@ -34,12 +34,28 @@ public class IndexController {
   * []
   * [PropertySourcesPropertyResolver.java, 115, org.springframework.core.env.PropertySourcesPropertyResolver, logKeyFound]
   * [Found key 'spring.liveBeansView.mbeanDomain' in PropertySource 'systemProperties' with value of type String] ## ''
+  *
+  * */
+
+  /*
+  *
+  * ["message", "\[%{NOTSPACE:currentDateTime}\] \[%{NOTSPACE:level}\] \[%{NOTSPACE:thread-id}\] \[%{NOTSPACE:class}\] \[%{DATA:hostName}\] \[%{DATA:ip}\] \[%{DATA:applicationName}\] \[%{DATA:location}\] \[%{DATA:messageInfo}\] ## (\'\'|%{QUOTEDSTRING:throwable})"]
+  * ["message",
+  *  "\[%{NOTSPACE:currentDateTime}\]
+  *   \[%{NOTSPACE:level}\]
+  *   \[%{NOTSPACE:thread-id}\]
+  *   \[%{NOTSPACE:class}\]
+  *   \[%{DATA:hostName}\]
+  *   \[%{DATA:ip}\]
+  *   \[%{DATA:applicationName}\]
+  *   \[%{DATA:location}\]
+  *   \[%{DATA:messageInfo}\]
+  *   ## (\'\'|%{QUOTEDSTRING:throwable})"]
+  *
   * */
 
   @GetMapping("index")
   public String index() throws UnknownHostException {
-
-
     InputMDC.putMDC();
 
 

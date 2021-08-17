@@ -18,7 +18,11 @@
     <RollingRandomAccessFile name="app_appender" fileName="${baseDir}/app-log-collector.log"
       filePattern="${baseDir}/app-log-collector_%d{yyyy-MM-dd}.%i.log">
       <!-- 过滤器 -->
-      <!-- 无过滤器，全量日志     -->
+      <!-- info级别以上全量日志     -->
+      <Filters>
+        <!-- 限制日志级别在error及以上 -->
+        <ThresholdFilter level="info"/>
+      </Filters>
       <!-- 日志格式 -->
       <PatternLayout pattern="${patternLayout}" />
       <!-- 策略 -->
