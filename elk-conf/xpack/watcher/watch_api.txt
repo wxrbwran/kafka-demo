@@ -79,7 +79,7 @@ PUT _xpack/watcher/watch/error_log_collector_watcher
     "test_error": {
       "webhook" : {
         "method" : "POST",
-        "url" : "http://192.168.11.31:8001/accurateWatch",
+        "url" : "http://localhost:8003/accurateWatch",
         "body" : "{\"title\": \"异常错误告警\", \"applicationName\": \"{{#ctx.payload.hits.hits}}{{_source.applicationName}}{{/ctx.payload.hits.hits}}\", \"level\":\"告警级别P1\", \"body\": \"{{#ctx.payload.hits.hits}}{{_source.messageInfo}}{{/ctx.payload.hits.hits}}\", \"executionTime\": \"{{#ctx.payload.hits.hits}}{{_source.currentDateTime}}{{/ctx.payload.hits.hits}}\"}"
       }
     }
