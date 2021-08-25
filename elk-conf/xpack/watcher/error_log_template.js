@@ -1,7 +1,7 @@
-// PUT _template/error-log-
 // 创建watcher前必须配置模版，不然匹配不到结果
+PUT _template/error-log-collector-
 {
-    "template": "error-log-*",
+    "template": "error-log-collector*",
     "order": 0,
     "settings": {
         "index": {
