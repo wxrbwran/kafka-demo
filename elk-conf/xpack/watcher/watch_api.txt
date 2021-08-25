@@ -1,6 +1,6 @@
 ## 创建一个watcher,比如定义一个trigger 每个10s钟看一下input里的数据
 ## 创建一个watcher,比如定义一个trigger 每个5s钟看一下input里的数据
-PUT _xpack/watcher/watch/error_log_collector_watcher
+PUT _xpack/watcher/watch/error_log_collector_watcher1
 {
   "trigger": {
     "schedule": {
@@ -10,7 +10,7 @@ PUT _xpack/watcher/watch/error_log_collector_watcher
   "input": {
     "search": {
       "request": {
-        "indices": ["<error_log_collector-{now+8h/d}>"],
+        "indices": ["<error_log_collector-2021.08.24>"],
         "body": {
           "size": 0,
           "query": {
@@ -45,7 +45,7 @@ PUT _xpack/watcher/watch/error_log_collector_watcher
   "transform": {
     "search": {
       "request": {
-        "indices": ["<error-log-collector-{now+8h/d}>"],
+        "indices": ["<error-log-collector-2021.08.24>"],
         "body": {
           "size": 1,
           "query": {
